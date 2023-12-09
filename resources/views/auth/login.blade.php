@@ -32,6 +32,12 @@
                                 <label for="password" class="form-label">Password</label>
                                 <input type="password" class="form-control" id="password" name="password">
                             </div>
+                            <div class="col-auto">
+                                <img src="{{ Captcha::src('default') }}" alt="">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" id="captcha" name="captcha">
+                            </div>
 
                             <p>Belum punya akun ? <a href="{{ route('home') }}">Daftar</a> </p>
                             <div class="col-12">

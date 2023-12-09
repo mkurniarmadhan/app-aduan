@@ -20,7 +20,7 @@
                 @guest
                     <div class=" col-md-5 offset-md-1">
                         <div class="card">
-                            <form class=" p-5" action="{{ route('daftar') }}" method="POST">
+                            <form class=" p-5 row" action="{{ route('daftar') }}" method="POST">
                                 @csrf
                                 <h5>Form Pendaftar pelapor</h5>
                                 <h6>Apakah ada konten yang ingin Anda adukan ? silakan daftar dibawah ini.</h6>
@@ -44,8 +44,15 @@
                                     <label for="password" class="form-label mb-0">Password</label>
                                     <input type="password" name="password" class="form-control border-1" id="password">
                                 </div>
+                                <div class="mb-3">
 
-
+                                    <div class="col-auto mb-2">
+                                        <img src="{{ Captcha::src('default') }}" alt="">
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" class="form-control" id="captcha" name="captcha">
+                                    </div>
+                                </div>
 
                                 <div class="d-grid">
                                     <button type="submit" class="btn btn-primary btn-lg">Daftar</button>

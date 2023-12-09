@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ env('APP_NAME') }}</title>
 
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <!--vendor css ================================================== -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendor.css') }}">
 
