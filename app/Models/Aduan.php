@@ -14,7 +14,7 @@ class Aduan extends Model
     protected $keyType = 'string';
     protected $primaryKey = 'aduan_id';
     protected $table = 'aduans';
-
+    protected $with = ['kategori'];
 
     protected $fillable = [
         'aduan_id',

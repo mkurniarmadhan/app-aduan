@@ -1,5 +1,7 @@
 <x-applayout>
 
+
+
     <section id="faq" class="position-relative overflow-hidden py-5"
         style="background: url({{ asset('assets/images/banner-img.png') }});">
 
@@ -76,5 +78,6 @@
             </div>
         </div>
     </section>
+
 
 </x-applayout>
