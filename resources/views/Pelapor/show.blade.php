@@ -119,6 +119,7 @@
 
                                 <div class="row my-2 mx-1 justify-content-center">
 
+                                    <img src="{{ asset('aduans/') }}" alt="">
                                     <p class="h4">{{ $pelapor->judul }}</p>
                                     <p class="lead">
                                         - {{ $pelapor->isi }}.
