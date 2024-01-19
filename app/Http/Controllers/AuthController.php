@@ -15,6 +15,11 @@ class AuthController extends Controller
 
         return view('auth.login');
     }
+    public function daftar()
+    {
+
+        return view('auth.daftar');
+    }
 
     public function doLogin(Request $request)
     {
@@ -26,16 +31,12 @@ class AuthController extends Controller
         $cek =  Auth::attempt($user);
 
 
-        if ($cek) {
-            if (Auth::user()->is_admin) {
-                return to_route('aduan.index');
-            }
-        }
 
-        return to_route('pelapor.index');
+
+        return to_route('home');
     }
 
-    public function daftar(Request $request)
+    public function doDaftar(Request $request)
     {
 
         $data =   $request->validate(

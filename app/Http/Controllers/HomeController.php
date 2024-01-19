@@ -16,6 +16,19 @@ class HomeController extends Controller
 
 
 
-        return view('home', compact('aduans'));
+        $datas = [];
+        foreach ($aduans as $key => $value) {
+            $datas[] = [
+
+                'value' => $value,
+                'name' => $key
+            ];
+        }
+
+
+
+
+
+        return view('index', compact('aduans', 'datas',));
     }
 }

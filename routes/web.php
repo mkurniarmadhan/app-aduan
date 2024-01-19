@@ -28,5 +28,6 @@ Route::resource('pelapor', PelaporController::class)->middleware('auth');
 
 Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'doLogin'])->name('doLogin');
-Route::post('daftar', [AuthController::class, 'daftar'])->name('daftar');
+Route::get('daftar', [AuthController::class, 'daftar'])->name('daftar');
+Route::post('daftar', [AuthController::class, 'doDaftar'])->name('doDaftar');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
