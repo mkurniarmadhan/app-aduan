@@ -2,177 +2,204 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ env('APP_NAME') }}</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <!--vendor css ================================================== -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendor.css') }}">
+    <title>Layanan Aduan Masyarakat</title>
+    <meta content="siapmas" name="description">
+    <meta content="siapmas" name="keywords">
 
-    <!-- Link Swiper's CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <!-- Favicons -->
+    <link href="{{ asset('assets/') }}/img/favicon.png" rel="icon">
+    <link href="{{ asset('assets/') }}/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-    <!--Bootstrap ================================================== -->
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous"> --}}
-
-    <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-
-    <!-- Style Sheet ================================================== -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/styles.css') }}">
-
-    <!-- Google Fonts ================================================== -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
     <link
-        href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,700;1,300&family=Roboto:wght@300;400;700&display=swap"
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
         rel="stylesheet">
 
+    <!-- Vendor CSS Files -->
+    <link href="{{ asset('assets/') }}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('assets/') }}/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="{{ asset('assets/') }}/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="{{ asset('assets/') }}/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="{{ asset('assets/') }}/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="{{ asset('assets/') }}/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="{{ asset('assets/') }}/vendor/simple-datatables/style.css" rel="stylesheet">
 
-    <!-- script ================================================== -->
-    <script src="{{ asset('assets/js/modernizr.js') }}"></script>
+    <!-- Template Main CSS File -->
+    <link href="{{ asset('assets/') }}/css/style.css" rel="stylesheet">
 
+    <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Updated: Nov 17 2023 with Bootstrap v5.3.2
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 </head>
 
-<body data-bs-spy="scroll" data-bs-target="#header-nav" tabindex="0">
+<body class="  {{ Auth::check() ? '' : 'toggle-sidebar' }}">
 
-    <nav class="navbar navbar-expand-lg bg-white navbar-light container-fluid py-3 position-fixed ">
-        <div class="container">
-            <a class="navbar-brand" href="/">
-                <h3>SIAPMAS</h3>
-                <span>layanan pengaduan online masyarakat</span>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+        <div class="d-flex align-items-center justify-content-between">
+            <a href="#" class="logo d-flex align-items-center">
+                <span class=" d-lg-block">SiapMas</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-                aria-controls="offcanvasNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
-                aria-labelledby="offcanvasNavbarLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                        aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav align-items-center justify-content-end flex-grow-1 pe-3">
+            @auth
 
-                    </ul>
-
-                    <div class="d-flex mt-5 mt-lg-0 ps-lg-3 align-items-center justify-content-center ">
+                <i class="bi bi-list toggle-sidebar-btn"></i>
+            @endauth
+        </div><!-- End Logo -->
 
 
-                        @auth
 
-                            @if (!Auth::user()->is_admin)
-                                <a href="{{ route('pelapor.create') }}"
-                                    class="btn btn-sm {{ Route::is('pelapor.create') ? 'btn-primary' : 'btn-outline-primary' }}">Buat
-                                    Laporan Baru</a>
 
-                                <a href="{{ route('logout') }}" type="button" class="btn btn-danger ms-md-3"> Keluar </a>
-                            @else
-                                <a href="{{ route('aduan.index') }}" type="button" class="btn btn-primary ms-md-3"> Lihat
-                                    Aduan
+        @auth
+            <nav class="header-nav ms-auto">
+                <ul class="d-flex align-items-center">
+
+                    <li class="nav-item d-block d-lg-none">
+                        <a class="nav-link nav-icon search-bar-toggle " href="#">
+                            <i class="bi bi-search"></i>
+                        </a>
+                    </li><!-- End Search Icon-->
+
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                            <i class="bi bi-bell"></i>
+                            <span class="badge bg-primary badge-number">4</span>
+                        </a><!-- End Notification Icon -->
+
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+                            <li class="dropdown-header">
+                                You have 4 new notifications
+                                <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+
+                            <li class="notification-item">
+                                <i class="bi bi-exclamation-circle text-warning"></i>
+                                <div>
+                                    <h4>Lorem Ipsum</h4>
+                                    <p>Quae dolorem earum veritatis oditseno</p>
+                                    <p>30 min. ago</p>
+                                </div>
+                            </li>
+
+
+                        </ul><!-- End Notification Dropdown Items -->
+
+                    </li><!-- End Notification Nav -->
+
+
+                    <li class="nav-item dropdown pe-3">
+
+                        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#"
+                            data-bs-toggle="dropdown">
+                            <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->nama }}</span>
+                        </a><!-- End Profile Iamge Icon -->
+
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                            <li class="dropdown-header">
+                                <h6>{{ Auth::user()->nama }}</h6>
+                                <span>{{ Auth::user()->email }}</span>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                                    <i class="bi bi-person"></i>
+                                    <span>My Profile</span>
                                 </a>
-                                <a href="{{ route('logout') }}" type="button" class="btn btn-danger ms-md-3"> Keluar </a>
-                            @endif
+                            </li>
 
-                        @else:
-                            <a href="{{ route('pelapor.create') }}" type="button" class="btn btn-success ms-md-3"> Buat
-                                Laporan </a>
-                            <a href="{{ route('login') }}" type="button" class="btn btn-primary ms-md-3">
-                                Masuk </a>
-                        @endauth
 
-                    </div>
-                </div>
-            </div>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}">
+                                    <i class="bi bi-box-arrow-right"></i>
+                                    <span>Sign Out</span>
+                                </a>
+                            </li>
+
+                        </ul><!-- End Profile Dropdown Items -->
+                    </li><!-- End Profile Nav -->
+
+                </ul>
+            </nav>
+        @endauth
+
+        @guest
+            <nav class="header-nav ms-auto me-3 d-flex">
+
+                <a href="{{ route('login') }}" class=" mx-2  btn btn-success">
+                    MASUK
+                </a>
+
+
+            </nav>
+        @endguest
+        <!-- End Icons Navigation -->
+
+    </header><!-- End Header -->
+
+
+    @auth
+        <x-sidebar />
+    @endauth
+
+
+
+
+
+    <main id="main" class="main">
+
+        {{ $slot }}
+
+    </main>
+    <!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer">
+        <div class="copyright">
+            &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
         </div>
-    </nav>
-
-    {{ $slot }}
-
-    <section id="footer">
-        <div class="container footer-container mt-5 pt-3">
-            <footer class="row my-5 py-5 ">
-
-                <div class=" col-8 mt-5 mt-md-0 ">
-                    {{-- <img src="images/main-logo.png" alt="image" class="my-3"> --}}
-                    <h3>SIAPMAS</h3>
-                    <p class="">Situs ini merupakan sarana yang aman dan terpercaya untuk menyampaikan aspirasi
-                        dan laporan Anda. Aduan Anda akan ditangani dengan cepat dan profesional oleh tim kami yang
-                        berdedikasi. Kami berkomitmen untuk transparansi dan akuntabilitas dalam penanganan aduan. Aduan
-                        Anda adalah langkah awal menuju perbaikan. Mari bersama-sama membangun masyarakat yang lebih
-                        baik.</p>
-                    <div class="d-flex align-items-center ">
-                        <a href="#" target="_blank"><iconify-icon class="social-link-icon active pe-4"
-                                icon="mdi:facebook"></iconify-icon></a>
-
-                        <a href="#" target="_blank"><iconify-icon class="social-link-icon pe-4"
-                                icon="mdi:instagram"></iconify-icon></a>
-
-                        <a href="#" target="_blank"><iconify-icon class="social-link-icon pe-4"
-                                icon="mdi:youtube"></iconify-icon></a>
-                    </div>
-
-                </div>
-
-
-
-                <div class="col-4 ">
-                    <h5 class="py-3">Contact Info</h5>
-                    <ul class="nav flex-collumn">
-                        <li class="nav-item d-flex mb-3">
-                            <iconify-icon class="contact-icon pe-3" icon="ion:location"></iconify-icon>
-                            <a href="#" class="nav-link p-0 "> lokasi </a>
-                        </li>
-                        <li class="nav-item d-flex mb-3">
-                            <iconify-icon class="contact-icon pe-3" icon="ion:call"></iconify-icon><a href="#"
-                                class="nav-link p-0 "> (62) 89694273720 </a>
-                        </li>
-                        <li class="nav-item d-flex mb-3">
-                            <iconify-icon class="contact-icon pe-3" icon="ion:mail"></iconify-icon><a href="#"
-                                class="nav-link p-0 "> info@siapmas.com </a>
-                        </li>
-
-                    </ul>
-                </div>
-
-
-
-            </footer>
+        <div class="credits">
+            <!-- All the links in the footer should remain intact. -->
+            <!-- You can delete the links only if you purchased the pro version. -->
+            <!-- Licensing information: https://bootstrapmade.com/license/ -->
+            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
         </div>
+    </footer><!-- End Footer -->
 
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
 
+    <!-- Vendor JS Files -->
+    <script src="{{ asset('assets/') }}/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="{{ asset('assets/') }}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('assets/') }}/vendor/chart.js/chart.umd.js"></script>
+    <script src="{{ asset('assets/') }}/vendor/echarts/echarts.min.js"></script>
+    <script src="{{ asset('assets/') }}/vendor/quill/quill.min.js"></script>
+    <script src="{{ asset('assets/') }}/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="{{ asset('assets/') }}/vendor/tinymce/tinymce.min.js"></script>
+    <script src="{{ asset('assets/') }}/vendor/php-email-form/validate.js"></script>
 
-        <footer class="d-flex flex-wrap justify-content-between align-items-center border-top"></footer>
-
-        <div class="container">
-            <footer class="d-flex flex-wrap justify-content-between align-items-center py-2 pt-4">
-                <div class="col-md-6 d-flex align-items-center">
-                    <p>© 2023 siapMas - All rights reserved</p>
-
-                </div>
-                <div class="col-md-6 d-flex align-items-center justify-content-end">
-                    <p class="">© 2023 Website </p>
-                </div>
-
-            </footer>
-        </div>
-    </section>
-
-    <!-- script ================================================== -->
-    <script src="{{ asset('assets/js/jquery-1.11.0.min.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins.js') }}"></script>
-    <script src="{{ asset('assets/js/script.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.7/dist/iconify-icon.min.js"></script>
-
+    <!-- Template Main JS File -->
+    <script src="{{ asset('assets/') }}/js/main.js"></script>
 
 </body>
 
